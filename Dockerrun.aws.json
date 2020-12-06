@@ -1,0 +1,37 @@
+{
+    "AWSEBDockerrunVersion" : 2,
+    "containerDefinitions" :[
+        {
+            "name": "client",
+            "image": "dockerabhijitedi/multi-client",
+            "hostname": "client",
+            "essential": false 
+        },
+        {
+           "name": "server",
+           "image": "dockerabhijitedi/multi-server",
+           "hostname": "api",
+           "essential": false 
+        },
+        {
+            "name": "worker",
+            "image": "dockerabhijitedi/multi-worker",
+            "hostname": "worker",
+            "essential": false
+        },
+        {
+            "name": "nginx",
+            "image": "dockerabhijitedi/multi-nginx",
+            "hostname": "nginx",
+            "essential": true,
+            "portMappings": [
+                {
+                "hostPort": 80,
+                "containerPOrt": 80
+                }
+            ],
+            "links": ["client", "server"]
+        }   
+    ]
+
+}
